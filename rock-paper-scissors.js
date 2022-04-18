@@ -77,3 +77,21 @@ function game() {
         }
         }
     }
+const div = document.querySelector('#buttons');
+
+const buttonRock = document.createElement('button');
+buttonRock.addEventListener('click', playRound);
+buttonRock.textContent = 'rock';
+div.appendChild(buttonRock);
+
+const buttonPaper = document.createElement('button');
+buttonPaper.addEventListener('click', playRound);
+buttonPaper.textContent ='paper';
+div.appendChild(buttonPaper);
+
+const buttonScissors = document.createElement('button');
+buttonScissors.addEventListener('click', playRound);
+buttonScissors.textContent ='scissors';
+div.appendChild(buttonScissors);
+
+const newDiv = document.createElement('div');
