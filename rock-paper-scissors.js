@@ -35,6 +35,30 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
+function playRock() {
+    if (computerPlay() === 'rock') {
+        return 'tie';
+    } else if (computerPlay() === 'paper') {
+        return 'defeat';
+    } else return 'victory';
+}
+
+function playPaper() {
+    if (computerPlay() === 'rock') {
+        return 'victory';
+    } else if (computerPlay() === 'paper') {
+        return 'tie';
+    } else return 'defeat';
+}
+
+function playScissors() {
+    if (computerPlay() === 'rock') {
+        return 'defeat';
+    } else if (computerPlay() === 'paper') {
+        return 'victory';
+    } else return 'tie';
+}
+
 // run rounds of 'playRound' and keep tally on wins and losses.
 // console.log the winner and loser from each round
 // each round should let input from user
@@ -79,8 +103,15 @@ function game() {
     }
 const div = document.querySelector('#buttons');
 
+function inputRPS() {
+
+}
+
 const buttonRock = document.createElement('button');
 buttonRock.addEventListener('click', playRound);
+buttonRock.addEventListener('click', (e) => {
+    console.log(e);
+})
 buttonRock.textContent = 'rock';
 div.appendChild(buttonRock);
 
