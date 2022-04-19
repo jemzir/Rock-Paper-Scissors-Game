@@ -116,18 +116,27 @@ const div = document.querySelector('#buttons');
 function endGame() {
     if (compScore === 5) {
         newDiv.textContent = 'Game Over! \nTry again??';
+        newPara.textContent = 'I will choose Rock...'
+        playerScore = 0;
+        compScore = 0;
     } else if (playerScore === 5) {
         newDiv.textContent = 'YOU WIN! Congratulations!';
+        newPara.textContent = 'You figured out I was lying huh?';
+        playerScore = 0;
+        compScore = 0;
     }
 }
-
 
 const buttonRock = document.createElement('button');
 buttonRock.addEventListener('click', () => {
     if (playRound('rock',computerPlay()) === 'victory') {
         playerScore += 1;
+        newPara.textContent = 'Rock always wins!';
     } else if (playRound('rock',computerPlay()) === 'defeat') {
         compScore +=1;
+        newPara.textContent = 'Nghiem won- He chose paper...';
+    } else if (playRound('rock', computerPlay()) === 'tie') {
+        newPara.textContent = 'yall chose the same thing!';
     }
     roundResult = `${playerScore} - ${compScore}`
     newDiv.textContent = `${roundResult}`;
@@ -141,8 +150,12 @@ const buttonPaper = document.createElement('button');
 buttonPaper.addEventListener('click', () => {
     if (playRound('paper',computerPlay()) === 'victory') {
         playerScore += 1;
+        newPara.textContent = 'Paper is strong!';
     } else if (playRound('paper',computerPlay()) === 'defeat') {
         compScore +=1;
+        newPara.textContent = 'Nghiem won- He chose scissors...';
+    } else if (playRound('paper', computerPlay()) === 'tie') {
+        newPara.textContent = 'yall chose the same thing!';
     }
     roundResult = `${playerScore} - ${compScore}`
     newDiv.textContent = `${roundResult}`;
@@ -155,8 +168,12 @@ const buttonScissors = document.createElement('button');
 buttonScissors.addEventListener('click', () => {
     if (playRound('scissors',computerPlay()) === 'victory') {
         playerScore += 1;
+        newPara.textContent = 'Yea! Cut that paper up!';
     } else if (playRound('scissors',computerPlay()) === 'defeat') {
         compScore +=1;
+        newPara.textContent = 'Nghiem won- I told you, I was going to choose rock...';
+    } else if (playRound('scissors', computerPlay()) === 'tie') {
+        newPara.textContent = 'yall chose the same thing!';
     }
     roundResult = `${playerScore} - ${compScore}`
     newDiv.textContent = `${roundResult}`;
@@ -168,3 +185,6 @@ div.appendChild(buttonScissors);
 const newDiv = document.createElement('div');
 newDiv.textContent = '0 - 0';
 div.insertAdjacentElement("beforebegin", newDiv);
+
+const newPara = document.createElement('p');
+div.insertAdjacentElement('afterbegin', newPara);
