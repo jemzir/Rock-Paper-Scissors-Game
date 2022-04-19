@@ -15,6 +15,8 @@ let playerSelection;
 // playerSelection needs to take input of any capitalization of result
 
 function playRound(playerSelection, computerSelection) {
+    let playerScore = 0;
+    let compScore = 0;
     let win = (
         playerSelection === 'rock' && computerSelection === 'scissors' || 
         playerSelection === 'paper' && computerSelection === 'rock' ||
@@ -27,8 +29,10 @@ function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
         return 'tie';
     } else if (win) {
+        playerScore += 1;
         return 'victory';
     } else if (lose) {
+        compScore += 1;
         return 'defeat';
     } else {
         console.log('What the hell just happened??');
@@ -72,8 +76,8 @@ function game() {
 
     for (let i = 0; i < 20 || PlayerWinCounter >= 3 || CompWinCounter  >= 3; i += 1) {
         // user input
-        playerSelection = prompt('What is your choice of weapon?')
-        .toLowerCase();
+        // playerSelection = prompt('What is your choice of weapon?')
+        // .toLowerCase();
         console.log(playerSelection);
 
         let result = playRound(playerSelection, computerPlay());
@@ -101,28 +105,66 @@ function game() {
         }
         }
     }
+
+// UI for RPS game
+
+let playerScore = 0;
+let compScore = 0;
+
 const div = document.querySelector('#buttons');
 
-function inputRPS() {
-
+function endGame() {
+    if (compScore === 5) {
+        newDiv.textContent = 'Game Over! \nTry again??';
+    } else if (playerScore === 5) {
+        newDiv.textContent = 'YOU WIN! Congratulations!';
+    }
 }
 
+
 const buttonRock = document.createElement('button');
-buttonRock.addEventListener('click', playRound);
-buttonRock.addEventListener('click', (e) => {
-    console.log(e);
-})
+buttonRock.addEventListener('click', () => {
+    if (playRound('rock',computerPlay()) === 'victory') {
+        playerScore += 1;
+    } else if (playRound('rock',computerPlay()) === 'defeat') {
+        compScore +=1;
+    }
+    roundResult = `${playerScore} - ${compScore}`
+    newDiv.textContent = `${roundResult}`;
+    endGame();
+});
+
 buttonRock.textContent = 'rock';
 div.appendChild(buttonRock);
 
 const buttonPaper = document.createElement('button');
-buttonPaper.addEventListener('click', playRound);
+buttonPaper.addEventListener('click', () => {
+    if (playRound('paper',computerPlay()) === 'victory') {
+        playerScore += 1;
+    } else if (playRound('paper',computerPlay()) === 'defeat') {
+        compScore +=1;
+    }
+    roundResult = `${playerScore} - ${compScore}`
+    newDiv.textContent = `${roundResult}`;
+    endGame();
+});
 buttonPaper.textContent ='paper';
 div.appendChild(buttonPaper);
 
 const buttonScissors = document.createElement('button');
-buttonScissors.addEventListener('click', playRound);
+buttonScissors.addEventListener('click', () => {
+    if (playRound('scissors',computerPlay()) === 'victory') {
+        playerScore += 1;
+    } else if (playRound('scissors',computerPlay()) === 'defeat') {
+        compScore +=1;
+    }
+    roundResult = `${playerScore} - ${compScore}`
+    newDiv.textContent = `${roundResult}`;
+    endGame();
+});
 buttonScissors.textContent ='scissors';
 div.appendChild(buttonScissors);
 
 const newDiv = document.createElement('div');
+newDiv.textContent = '0 - 0';
+div.insertAdjacentElement("beforebegin", newDiv);
